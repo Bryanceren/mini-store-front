@@ -7,13 +7,18 @@ export const FormInput = ({
   name,
   title,
   validations,
+  solo = false,
   ...rest
 }) => {
   return (
     <div className="group relative">
-      <span className="group-focus-within:text-gray-600 text-gray-400  text-sm  left-2 transform transition-all ">
-        {title}
-      </span>
+      {!solo ? (
+        <span className="group-focus-within:text-gray-600 text-gray-400  text-sm  left-2 transform transition-all ">
+          {title}
+        </span>
+      ) : (
+        <div className="h-4"></div>
+      )}
       <input
         className="p-3 mb-4 border-0 outline-none bg-gray-100 w-full focus:bg-gray-200 transition-all duration-300"
         {...register(name, validations)}

@@ -69,7 +69,7 @@ const SignInPage = () => {
           </button>
           <Link href={"/signup"}>
             <button className="text-xs hover:scale-105 transition-all transform">
-              Don't have an account?
+              {"Don't have an account?"}
             </button>
           </Link>
         </div>
