@@ -37,7 +37,7 @@ export const FormInput = ({
   );
 };
 
-export const Select = ({ register, options, name, ...rest }) => {
+export const FormSelect = ({ register, options, name, ...rest }) => {
   return (
     <select {...register(name)} {...rest}>
       {options.map((value) => (
