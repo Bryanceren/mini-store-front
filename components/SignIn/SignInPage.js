@@ -5,10 +5,22 @@ import Form from "../common/Form/Form";
 import { FormInput } from "../common/FormInput/FormInput";
 import { FiShoppingCart } from "react-icons/fi";
 import Button from "../common/Button/Button";
+import SignInPageAPI from "./SignInPageAPI";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../store/reducers/authSlice";
+import { useRouter } from "next/router";
 
+const signInAPI = new SignInPageAPI("http://localhost:3003/");
 const SignInPage = () => {
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const onSubmit = async (data) => {
+    const response = await signInAPI.login(data);
+    if (response.token) {
+      dispatch(setToken(response.token));
+      router.push("/");
+    }
+    console.log(response);
   };
   const onError = (errors) => {
     console.log(errors);
@@ -23,7 +35,7 @@ const SignInPage = () => {
         <Form onSubmit={onSubmit} onError={onError}>
           <FormInput
             title={"Email"}
-            name="email"
+            name="username"
             validations={{
               required: "Email is required",
               pattern: {
