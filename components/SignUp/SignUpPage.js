@@ -8,7 +8,7 @@ import Button from "../common/Button/Button";
 import SignUpPageAPI from "./SignUpPageAPI";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { setToken } from "../../store/reducers/authSlice";
+import { setToken, setUser } from "../../store/reducers/authSlice";
 
 const signupPageAPI = new SignUpPageAPI("http://localhost:3003/");
 const SignUpPage = () => {
@@ -18,6 +18,7 @@ const SignUpPage = () => {
     const response = await signupPageAPI.signup({ ...data, rolId: 1 });
     if (response.token) {
       dispatch(setToken(response.token));
+      dispatch(setUser(response.user));
       router.push("/");
     }
     console.log(response);

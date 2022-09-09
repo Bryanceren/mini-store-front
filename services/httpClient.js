@@ -24,7 +24,7 @@ const HttpClient = async (
   try {
     return await axios(config);
   } catch (e) {
-    console.log(e);
+    alert(e);
     throw e;
   }
 };

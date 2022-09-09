@@ -7,7 +7,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import Button from "../common/Button/Button";
 import SignInPageAPI from "./SignInPageAPI";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../store/reducers/authSlice";
+import { setToken, setUser } from "../../store/reducers/authSlice";
 import { useRouter } from "next/router";
 
 const signInAPI = new SignInPageAPI("http://localhost:3003/");
@@ -18,6 +18,7 @@ const SignInPage = () => {
     const response = await signInAPI.login(data);
     if (response.token) {
       dispatch(setToken(response.token));
+      dispatch(setUser(response.user));
       router.push("/");
     }
     console.log(response);

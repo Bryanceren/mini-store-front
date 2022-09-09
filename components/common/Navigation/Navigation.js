@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 const Navigation = () => {
   const cartState = useSelector((state) => state.persisted.cart);
+  const authState = useSelector((state) => state.persisted.auth);
   const cartItemsQty = cartState.items.reduce((curNumber, item) => {
     return curNumber + item.amount;
   }, 0);
@@ -38,7 +39,11 @@ const Navigation = () => {
         <div className="flex items-center gap-3">
           <IoPerson></IoPerson>
           <span className=" font-light cursor-default select-none hover:scale-105 transition-all hidden sm:block">
-            Guest
+            {authState.user ? (
+              <span>{authState.user.email}</span>
+            ) : (
+              <span>Guest</span>
+            )}
           </span>
         </div>
       </div>
