@@ -16,8 +16,10 @@ const Cart = () => {
   const processPaymentHandler = (e) => {
     if (authState.token == null) {
       router.push("/signin");
+      return;
     }
-    console.log("a");
+    alert("Payment processed!");
+    router.push("/");
   };
 
   const cartItemAddHandler = (item) => {
