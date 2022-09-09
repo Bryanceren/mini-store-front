@@ -1,10 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/reducers/cartSlice";
+import Button from "../common/Button/Button";
 
+const ratings = [1, 2, 3, 4, 5];
 const Product = ({ product }) => {
-  const ratings = [1, 2, 3, 4, 5];
-
+  const dispatch = useDispatch();
+  const addToCart = (newProduct) => {
+    dispatch(addProduct({ ...newProduct, amount: 1 }));
+  };
   return (
     <div
       className="col-span-1  p-6 h-[28rem] justify-center flex flex-col"
@@ -18,28 +25,28 @@ const Product = ({ product }) => {
           height="100"
         ></Image>
       </div>
-      <div className="font-semibold ">
-        {product.title.substring(0, 30)}
-        {product.title.length >= 30 && "..."}
-      </div>
-      <span class="bg-gray-100  text-xs mr-2 px-2.5 py-0.5 rounded-full w-fit mt-1">
+      <Link href={"/product/" + product.id}>
+        <div className="font-semibold cursor-pointer">
+          {product.title.substring(0, 30)}
+          {product.title.length >= 30 && "..."}
+        </div>
+      </Link>
+      <span className="bg-gray-100  text-xs mr-2 px-2.5 py-0.5 rounded-full w-fit mt-1">
         {product.category}
       </span>
       <div className="inline-flex mt-2">
-        {ratings.map((star) =>
+        {ratings.map((star, index) =>
           star <= parseInt(product.rating.rate) ? (
-            <AiFillStar className="fill-yellow-300" />
+            <AiFillStar className="fill-yellow-300" key={"starFill" + index} />
           ) : (
-            <AiOutlineStar className="" />
+            <AiOutlineStar className="" key={"starOutline" + index} />
           )
         )}
       </div>
       <br />
       <div className="flex justify-between mt-auto items-end">
         <span className="font-bold text-xl ">{"$ " + product.price}</span>
-        <button className="py-2 px-4 font-semibold bg-primary text-white block active:scale-95 transition-all transform">
-          Add
-        </button>
+        <Button onClick={() => addToCart(product)}>Add</Button>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Form from "../common/Form/Form";
 import { FormInput } from "../common/FormInput/FormInput";
 import { FiShoppingCart } from "react-icons/fi";
+import Button from "../common/Button/Button";
 
 const SignInPage = () => {
   const onSubmit = (data) => {
@@ -11,13 +12,6 @@ const SignInPage = () => {
   };
   const onError = (errors) => {
     console.log(errors);
-    let errorMessage = "";
-    const errorsKeys = Object.keys(errors);
-    errorsKeys.forEach((error, index) => {
-      errorMessage +=
-        errors[error].message + (index + 1 != errorsKeys.length ? " , " : " ");
-    });
-    console.log(errorMessage);
   };
   return (
     <div className="min-h-screen bg-background w-full flex justify-center items-center bg-green px-5">
@@ -55,12 +49,9 @@ const SignInPage = () => {
             }}
           ></FormInput>
 
-          <button
-            className="py-2 px-4 mb-4 mx-auto bg-primary text-white block active:scale-95 transition-all transform"
-            type="submit"
-          >
-            Sign In
-          </button>
+          <div className="justify-center flex my-3">
+            <Button type="submit">Sign In</Button>
+          </div>
         </Form>
         <hr></hr>
         <div className="flex justify-around pt-4">

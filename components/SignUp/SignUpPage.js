@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Form from "../common/Form/Form";
 import { FormInput } from "../common/FormInput/FormInput";
 import { FiShoppingCart } from "react-icons/fi";
+import Button from "../common/Button/Button";
 
 const SignUpPage = () => {
   const onSubmit = (data) => {
@@ -11,13 +12,6 @@ const SignUpPage = () => {
   };
   const onError = (errors) => {
     console.log(errors);
-    let errorMessage = "";
-    const errorsKeys = Object.keys(errors);
-    errorsKeys.forEach((error, index) => {
-      errorMessage +=
-        errors[error].message + (index + 1 != errorsKeys.length ? " , " : " ");
-    });
-    console.log(errorMessage);
   };
   return (
     <div className="min-h-screen bg-background w-full flex justify-center items-center bg-green px-5">
@@ -67,21 +61,18 @@ const SignUpPage = () => {
             }}
           ></FormInput>
 
-          <button
-            className="py-2 px-4 mb-4 mx-auto bg-primary text-white block active:scale-95 transition-all transform"
-            type="submit"
-          >
-            Sign Up
-          </button>
+          <div className="justify-center flex my-3">
+            <Button type="submit">Sign Up</Button>
+          </div>
         </Form>
         <hr></hr>
         <div className="flex justify-around pt-4">
-          <button className="text-xs hover:scale-105 transition-all transform">
+          <button className="text-xs transition-all transform">
             Forgot your password?
           </button>
-          <Link href={"/signup"}>
-            <button className="text-xs hover:scale-105 transition-all transform">
-              {"Don't have an account?"}
+          <Link href={"/signin"}>
+            <button className="text-xs transition-all transform">
+              {"Already have an account?"}
             </button>
           </Link>
         </div>
